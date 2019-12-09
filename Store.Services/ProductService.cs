@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Data.Abstractions;
 using Data.Entities;
@@ -49,7 +50,10 @@ namespace Store.Services
 		public async Task DeleteProduct(DeleteProductCommand command)
 		{
 			var product = await _storeContext.Products.FindAsync(command.Id);
-			if (product == null) return;
+			if (product == null)
+			{
+				throw new Exception("TODO: exception type and translate to 404");
+			}
 
 			_storeContext.Products.Remove(product);
 		}

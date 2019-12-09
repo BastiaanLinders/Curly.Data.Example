@@ -28,8 +28,13 @@ namespace UnitOfWorkExperiment
 			services.AddModule<StoreServicesModule>();
 			services.AddModule<AutoMapperModule>();
 
-			services.AddScoped<UnitOfWorkActionFilter>();
-			services.AddControllers(config => config.Filters.Add<UnitOfWorkActionFilter>());
+			//services.AddScoped<UnitOfWorkActionFilter>();
+			//services.AddScoped<CommandPopulatorFilter>();
+			services.AddControllers(config =>
+			{
+				config.Filters.Add<UnitOfWorkActionFilter>();
+				config.Filters.Add<CommandPopulatorFilter>();
+			});
 
 			services.AddSwaggerGen(c =>
 			{

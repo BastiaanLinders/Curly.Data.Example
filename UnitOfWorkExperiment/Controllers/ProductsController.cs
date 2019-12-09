@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Dtos;
 using Dtos.Commands;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Store.Abstractions;
 
 namespace UnitOfWorkExperiment.Controllers
@@ -11,10 +12,13 @@ namespace UnitOfWorkExperiment.Controllers
 	[Route("[controller]")]
 	public class ProductsController : ControllerBase
 	{
+		private readonly ILogger<ProductsController> _logger;
 		private readonly IProductService _productService;
 
-		public ProductsController(IProductService productService)
+		public ProductsController(ILogger<ProductsController> logger,
+		                          IProductService productService)
 		{
+			_logger = logger;
 			_productService = productService;
 		}
 
@@ -39,6 +43,7 @@ namespace UnitOfWorkExperiment.Controllers
 		[HttpDelete("{id}")]
 		public async Task Remove(int id, DeleteProductCommand command)
 		{
+			_logger.LogInformation($"id = {id} || command.id = {command.Id}");
 			await _productService.DeleteProduct(command);
 		}
 	}
