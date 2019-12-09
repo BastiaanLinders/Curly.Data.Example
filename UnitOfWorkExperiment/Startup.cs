@@ -1,3 +1,4 @@
+using Data.Entities.Mapping;
 using Data.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,6 +26,7 @@ namespace UnitOfWorkExperiment
 		{
 			services.AddModule<DataServicesModule>(Configuration);
 			services.AddModule<StoreServicesModule>();
+			services.AddModule<AutoMapperModule>();
 
 			services.AddScoped<UnitOfWorkActionFilter>();
 			services.AddControllers(config => config.Filters.Add<UnitOfWorkActionFilter>());
@@ -32,10 +34,10 @@ namespace UnitOfWorkExperiment
 			services.AddSwaggerGen(c =>
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo
-				{
-					Title = "Products",
-					Version = "1.0.0"
-				});
+				                   {
+					                   Title = "Products",
+					                   Version = "1.0.0"
+				                   });
 			});
 		}
 

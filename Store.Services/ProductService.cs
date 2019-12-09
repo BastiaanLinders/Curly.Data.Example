@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using System.Transactions;
 using Data.Abstractions;
 using Data.Entities;
+using Data.Entities.Mapping;
 using Dtos;
 using Dtos.Commands;
 using Microsoft.EntityFrameworkCore;
@@ -23,41 +22,25 @@ namespace Store.Services
 		public async Task<IReadOnlyCollection<ProductSummaryDto>> GetAll()
 		{
 			return await _storeContext.Products
-			                          .Select(p => new ProductSummaryDto
-			                          {
-				                          Id = p.Id,
-				                          Title = p.Title
-			                          })
+			                          .Project<Product, ProductSummaryDto>()
 			                          .ToListAsync();
 		}
 
 		public async Task<ProductDto> GetById(int id)
 		{
 			return await _storeContext.Products
-			                          .Select(p => new ProductDto
-			                          {
-				                          Id = p.Id,
-				                          Title = p.Title,
-				                          Articles = p.Articles.Select(a => new ArticleSummaryDto
-				                          {
-					                          Id = a.Id,
-					                          Title = a.Title,
-					                          TotalStock = a.Stock.Sum(s => s.Count)
-				                          })
-			                          })
-			                          .SingleOrDefaultAsync(p => p.Id == id);
+			                          .Project<Product, ProductDto>()
+									  .SingleOrDefaultAsync(p => p.Id == id);
 		}
 
 		public Task CreateProduct(CreateProductCommand command)
 		{
 			var product = new Product
-			{
-				Title = command.Title
-			};
+			              {
+				              Title = command.Title
+			              };
 
 			_storeContext.Products.Add(product);
-
-			//throw new TransactionInDoubtException("Bla bla bla!");
 
 			return Task.CompletedTask;
 		}

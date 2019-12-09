@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Data.Abstractions\Data.Abstractions.csproj" />
+    <ProjectReference Include="..\Data.Entities.Mapping\Data.Entities.Mapping.csproj" />
     <ProjectReference Include="..\Data.Entities\Data.Entities.csproj" />
     <ProjectReference Include="..\Dtos\Dtos.csproj" />
     <ProjectReference Include="..\Store.Abstractions\Store.Abstractions.csproj" />

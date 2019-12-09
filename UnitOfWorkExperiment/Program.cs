@@ -14,7 +14,11 @@ namespace UnitOfWorkExperiment
 		public static IHostBuilder CreateHostBuilder(string[] args)
 		{
 			return Host.CreateDefaultBuilder(args)
-			           .ConfigureLogging((context, builder) => { builder.AddConfiguration(context.Configuration.GetSection("Logging")).AddDebug(); })
+			           .ConfigureLogging((context, builder) =>
+			           {
+				           builder.AddConfiguration(context.Configuration.GetSection("Logging"))
+				                  .AddDebug();
+			           })
 			           .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
 		}
 	}

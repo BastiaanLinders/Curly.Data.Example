@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <StartupObject></StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,11 +10,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Data.Entities.Mapping\Data.Entities.Mapping.csproj" />
     <ProjectReference Include="..\Data.Services\Data.Services.csproj" />
     <ProjectReference Include="..\Dtos\Dtos.csproj" />
     <ProjectReference Include="..\Store.Abstractions\Store.Abstractions.csproj" />
     <ProjectReference Include="..\Store.Services\Store.Services.csproj" />
     <ProjectReference Include="..\Utilities\Utilities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
 
 

@@ -6,11 +6,13 @@
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Data.Entities\Data.Entities.csproj" />
     <ProjectReference Include="..\Dtos\Dtos.csproj" />
+    <ProjectReference Include="..\Utilities\Utilities.csproj" />
   </ItemGroup>
 
 </Project>
